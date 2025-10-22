@@ -118,3 +118,77 @@ impl ClashClient {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_client_creation_without_secret() {
+        let client = ClashClient::new("http://localhost:9090".to_string(), None);
+        assert_eq!(client.base_url, "http://localhost:9090");
+    }
+
+    #[test]
+    fn test_client_creation_with_secret() {
+        let client = ClashClient::new(
+            "http://localhost:9090".to_string(),
+            Some("test-secret".to_string()),
+        );
+        assert_eq!(client.base_url, "http://localhost:9090");
+    }
+
+    #[test]
+    fn test_client_creation_with_empty_secret() {
+        let client = ClashClient::new("http://localhost:9090".to_string(), Some("".to_string()));
+        assert_eq!(client.base_url, "http://localhost:9090");
+    }
+
+    #[test]
+    fn test_client_with_custom_url() {
+        let client = ClashClient::new("http://example.com:9090".to_string(), None);
+        assert_eq!(client.base_url, "http://example.com:9090");
+    }
+
+    #[test]
+    fn test_version_with_empty_url() {
+        let client = ClashClient::new("".to_string(), None);
+        let result = client.version();
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_get_proxies_with_empty_url() {
+        let client = ClashClient::new("".to_string(), None);
+        let result = client.get_proxies();
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_get_proxy_with_empty_name() {
+        let client = ClashClient::new("http://localhost:9090".to_string(), None);
+        let result = client.get_proxy("");
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_switch_proxy_with_empty_group() {
+        let client = ClashClient::new("http://localhost:9090".to_string(), None);
+        let result = client.switch_proxy("", "proxy");
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_switch_proxy_with_empty_proxy() {
+        let client = ClashClient::new("http://localhost:9090".to_string(), None);
+        let result = client.switch_proxy("group", "");
+        assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_set_mode_with_empty_mode() {
+        let client = ClashClient::new("http://localhost:9090".to_string(), None);
+        let result = client.set_mode("");
+        assert!(result.is_err());
+    }
+}
