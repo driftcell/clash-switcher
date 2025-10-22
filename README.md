@@ -25,9 +25,25 @@ By default, the tool connects to Clash at `http://localhost:9090`. Make sure you
 
 ```yaml
 external-controller: 127.0.0.1:9090
+# Optional: set a secret for API authentication
+secret: your-secret-here
 ```
 
-## Usage
+### Command Line Options
+
+You can override the default API URL and provide a secret via command-line arguments:
+
+```bash
+# Use custom URL
+clash-switcher --url http://192.168.1.100:9090 proxies
+
+# Use custom URL with secret
+clash-switcher --url http://192.168.1.100:9090 --secret your-secret proxies
+```
+
+These options are global and work with any command.
+
+## Commands
 
 ### View Clash Version
 
@@ -85,6 +101,16 @@ Direct mode:
 clash-switcher mode global
 clash-switcher mode rule
 clash-switcher mode direct
+```
+
+## Global Options
+
+- `--url <URL>` - Clash API URL (default: `http://localhost:9090`)
+- `--secret <SECRET>` - Clash API secret for authentication (default: empty)
+
+Example with global options:
+```bash
+clash-switcher --url http://example.com:9090 --secret mytoken current
 ```
 
 ## Project Structure
