@@ -14,9 +14,10 @@ impl ClashClient {
 
         if let Some(secret) = secret
             && !secret.is_empty()
-                && let Ok(value) = HeaderValue::from_str(&format!("Bearer {}", secret)) {
-                    headers.insert(AUTHORIZATION, value);
-                }
+            && let Ok(value) = HeaderValue::from_str(&format!("Bearer {}", secret))
+        {
+            headers.insert(AUTHORIZATION, value);
+        }
 
         let client = Client::builder()
             .default_headers(headers)
