@@ -3,6 +3,14 @@ use clap::{Parser, Subcommand};
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 pub struct Cli {
+    /// Clash API URL
+    #[arg(long, default_value = "http://localhost:9090", global = true)]
+    pub url: String,
+
+    /// Clash API secret (if configured)
+    #[arg(long, default_value = "", global = true)]
+    pub secret: String,
+
     #[command(subcommand)]
     pub command: Command,
 }

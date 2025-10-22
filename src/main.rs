@@ -11,7 +11,14 @@ use client::ClashClient;
 
 fn main() -> Result<()> {
     let cli = Cli::parse();
-    let client = ClashClient::new("http://localhost:9090".into());
+
+    let secret = if cli.secret.is_empty() {
+        None
+    } else {
+        Some(cli.secret)
+    };
+
+    let client = ClashClient::new(cli.url, secret);
 
     match cli.command {
         Command::Version => commands::version::execute(&client),
