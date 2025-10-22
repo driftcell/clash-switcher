@@ -1,1 +1,21 @@
+# Build artifacts
 /target
+
+# Nextest artifacts
+.nextest/
+
+# Test coverage
+cobertura.xml
+tarpaulin-report.html
+lcov.info
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
