@@ -21,11 +21,10 @@ pub fn execute(client: &ClashClient) -> Result<()> {
     let type_width = 12;
 
     println!(
-        "{} {} {} {}",
+        "{} {} {} CURRENT",
         pad_string("ID", id_width),
         pad_string("NAME", name_width),
-        pad_string("TYPE", type_width),
-        "CURRENT"
+        pad_string("TYPE", type_width)
     );
     println!("{}", "-".repeat(85));
 

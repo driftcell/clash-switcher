@@ -12,13 +12,11 @@ impl ClashClient {
     pub fn new(base_url: String, secret: Option<String>) -> Self {
         let mut headers = HeaderMap::new();
 
-        if let Some(secret) = secret {
-            if !secret.is_empty() {
-                if let Ok(value) = HeaderValue::from_str(&format!("Bearer {}", secret)) {
+        if let Some(secret) = secret
+            && !secret.is_empty()
+                && let Ok(value) = HeaderValue::from_str(&format!("Bearer {}", secret)) {
                     headers.insert(AUTHORIZATION, value);
                 }
-            }
-        }
 
         let client = Client::builder()
             .default_headers(headers)
