@@ -139,6 +139,61 @@ src/
 - colored - Terminal colors
 - unicode-width - String width calculation for alignment
 
+## Development
+
+### Running Tests
+
+This project uses [cargo-nextest](https://nexte.st/) for faster test execution.
+
+Install nextest:
+```bash
+cargo install cargo-nextest
+```
+
+Run tests:
+```bash
+# Run all tests with nextest
+cargo nextest run
+
+# Run tests with standard cargo
+cargo test
+
+# Run specific test
+cargo nextest run test_name
+
+# Run with coverage
+cargo install cargo-tarpaulin
+cargo tarpaulin --out html
+```
+
+### Linting and Formatting
+
+```bash
+# Check code formatting
+cargo fmt --check
+
+# Format code
+cargo fmt
+
+# Run clippy lints
+cargo clippy --all-targets --all-features
+```
+
+### Continuous Integration
+
+The project uses GitHub Actions for CI/CD:
+
+- **CI Workflow** - Runs on every push and pull request
+  - Tests on Linux, macOS, and Windows
+  - Code formatting checks
+  - Clippy lints
+  - Build verification
+  - Code coverage
+
+- **Release Workflow** - Triggered by version tags or manual dispatch
+  - Builds binaries for multiple platforms
+  - Creates GitHub releases with artifacts
+
 ## License
 
 MIT
